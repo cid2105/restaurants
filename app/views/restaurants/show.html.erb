@@ -1,0 +1,50 @@
+<% content_for :nav do %>
+<%= get_navigation("browse") %>
+<% end %>
+<br/>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @restaurant.name %>
+</p>
+
+<p>
+  <b>Street:</b>
+  <%= @restaurant.street %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @restaurant.city %>
+</p>
+
+<p>
+  <b>Zip:</b>
+  <%= @restaurant.zip %>
+</p>
+
+<p>
+  <b>Website:</b>
+  <%= @restaurant.website %>
+</p>
+
+<p>
+  <b>Number:</b>
+  <%= @restaurant.number %>
+</p>
+
+<p>
+  <b>Tags:</b>
+  <%= join_tags(@restaurant) %>
+</p>
+
+<h2>Reviews</h2>
+<% @restaurant.reviews.each do |review| %>
+  <%= render :partial => "reviews/review", :collection => @restaurant.reviews %>
+<% end %>
+
+<h2>Add a review:</h2>
+<%= render :partial => "reviews/form" %>
+<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
+<%= link_to 'Back', restaurants_path %>

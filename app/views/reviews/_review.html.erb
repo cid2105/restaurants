@@ -1,0 +1,19 @@
+<p>
+    <b>Reviewer:</b>
+    <%= review.reviewer %>
+  </p>
+ 
+  <p>
+    <b>Dish:</b>
+    <%= review.dish %>
+  </p>
+
+
+ <p>
+   <b>Review:</b>
+   <%= review.content %>
+ </p>
+
+<p> 
+<%= link_to 'Destroy', [review.restaurant, review], :confirm => 'Are you sure?', :method => :delete %>
+</p>

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<title>Meal Mecca</title>
+	<%= csrf_meta_tag %>
+     <%= stylesheet_link_tag :all %>
+    
+	<%= javascript_include_tag "jquery-1.4.1.min" %>	
+	<%= javascript_include_tag "jquery-func" %>
+    <%= javascript_include_tag "jquery.jcarousel.pack" %>
+    <%= render 'layouts/stylesheets' %>
+
+<%= javascript_include_tag :defaults %>
+</head>
+<body>
+    <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
+<div id="page" class="shell">
+	<!-- Logo + Search + Navigation -->
+	<div id="top">
+		<div class="cl">&nbsp;</div>
+<%= image_tag "logo.gif", :alt => 'foo' %>
+		<form action="" method="post" id="search">
+			<div class="field-holder">
+				<input type="text" class="field" value="Search" title="Search" />
+			</div>
+			<input type="submit" class="button" value="Search" />
+			<div class="cl">&nbsp;</div>
+		</form>
+		<div class="cl">&nbsp;</div>
+		<%= yield :nav %>	
+	</div>
+	<!-- END Logo + Search + Navigation -->
+	<!-- Header -->
+	<div id="header">
+		<%= yield :header %>	
+	</div>
+	<!-- END Header -->
+	<!-- Main -->
+	<div id="main">
+	<%=  yield %>
+		<!-- Three Column Content -->
+		<%= yield :three_column %>
+		
+		<!-- Two Column Content -->
+		<%= yield :two_column%>
+		<!-- END Two Column Content -->
+	</div>
+	<!-- END Main -->
+	<!-- Footer -->
+	<div id="footer">
+		<p class="right">&copy; 2010 - CompanyName &nbsp; Design by <a href="http://chocotemplates.com" target="_blank" title="The Sweetest CSS Templates WorldWide">Chocotemplates.com</a></p>
+		<p><a href="#">Home</a><span>&nbsp;</span><a href="#">About Us</a><span>&nbsp;</span><a href="#">Services</a><span>&nbsp;</span><a href="#">Solutions</a><span>&nbsp;</span><a href="#">Support</a><span>&nbsp;</span><a href="#">Partners</a><span>&nbsp;</span><a href="#">Contact</a></p>
+		<div class="cl">&nbsp;</div>
+	</div>
+	<!-- END Footer -->
+	<br />
+</div>
+</body>
+</html>

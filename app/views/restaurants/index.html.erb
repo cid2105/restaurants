@@ -1,0 +1,45 @@
+<% content_for :nav do %>
+<%= get_navigation("browse") %>
+<% end %>
+	
+<div class="cl">&nbsp;</div>
+<div class="col">
+<h2>Browse Restaurants</h2>
+</div><br/>
+
+
+<table border=1>
+  <tr>
+    <th>Name</th>
+    <th>Street</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip</th>
+    <th>Website</th>
+    <th>Number</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @restaurants.each do |restaurant| %>
+  <tr>
+    <td><%= restaurant.name %></td>
+    <td><%= restaurant.street %></td>
+    <td><%= restaurant.city %></td>
+    <td><%= restaurant.state %></td>
+    <td><%= restaurant.zip %></td>
+    <td><%= restaurant.website %></td>
+    <td><%= restaurant.number %></td>
+    <td><%= link_to 'Show', restaurant %></td>
+    <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td>
+    <td><%= link_to 'Destroy', restaurant, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Restaurant', new_restaurant_path %>
+
+
