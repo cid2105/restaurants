@@ -2,8 +2,8 @@ source 'http://rubygems.org'
 
 gem 'activesupport', '3.0.9'
 gem 'rails', '3.0.9'
-#gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
-#gem 'pg'
+gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
+
 gem 'gravatar_image_tag', '1.0.0.pre2'
 gem 'will_paginate', '3.0.pre2'
 # Bundle edge Rails instead:
@@ -11,7 +11,6 @@ gem 'will_paginate', '3.0.pre2'
 
 #gem 'sqlite3'
 
-gem 'pg'
 group :development do
 	gem 'rspec-rails', '2.5.0'
 	gem 'annotate-models', '1.0.4'
@@ -61,6 +60,6 @@ gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
 gem "oa-core"
 gem "omniauth"
 gem 'fb_graph'
-gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+gem 'rails_admin'
 gem 'yelp'
 gem 'fastercsv', '>=1.5.4'

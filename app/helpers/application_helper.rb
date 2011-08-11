@@ -24,7 +24,6 @@ HTML
 unless user_signed_in?
     html2 = <<HTML
       <li><a href="#{user_omniauth_authorize_path(:facebook)}" #{token3}><span>Login</span></a></li>
-            <li><a href="#{user_omniauth_authorize_path(:facebook)}" #{token4}><span>Register</span></a></li></ul>
 HTML
             
 html += html2
