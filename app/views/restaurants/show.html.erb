@@ -2,49 +2,156 @@
 <%= get_navigation("browse") %>
 <% end %>
 <br/>
-<p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @restaurant.name %>
-</p>
 
-<p>
-  <b>Street:</b>
-  <%= @restaurant.street %>
-</p>
 
-<p>
-  <b>City:</b>
-  <%= @restaurant.city %>
-</p>
+	<% content_for :three_column do %>
 
-<p>
-  <b>Zip:</b>
-  <%= @restaurant.zip %>
-</p>
+<div id="tabs">
+	<ul id="navigation" style="border-color:white;">
+		<li><a href="#tabs-1">About</a></li>
+		<li><a href="#tabs-2">Reviews</a></li>
+		<li><a href="#tabs-3">Add a Review</a></li>
+	</ul>
+	
+<div class="cols two-cols">
+	<div class="cl">&nbsp;</div>
+	<div class="col" id="tabs-1" style="height:275px;">
+		
+		
+		
+		<div class="infobox-container">
+		<div class="triangle-l"></div>
+		<div class="triangle-r"></div>
+		<div class="infobox">
+		<a id="dish"><h3><span><%= @restaurant %></span></h3></a>
+		<p>&nbsp;</p>
+		<p>
+		  <b>Address:</b>
+		  <span style="color:#ccc; font-size:10px;"><%= @restaurant.formatted_address %></span>
+		  <br/>
+		  <b>Number:</b>
+		  <span style="color:#ccc; font-size:10px;"><%= @restaurant.number %></span>
+		</p>
+				<p>&nbsp;</p>
+		
+		</div>
+		</div>
+		
+		<%= image_tag "http://maps.google.com/maps/api/staticmap?center=#{@restaurant.street.strip},#{@restaurant.city.strip},#{@restaurant.state.strip},#{@restaurant.zip.strip}&zoom=17&size=400x400&sensor=false&markers=#{@restaurant.street.strip},#{@restaurant.city.strip},#{@restaurant.state.strip},#{@restaurant.zip.strip}", :alt => 'foo', :style => "position:relative; left: 550px; bottom: 150px", :height => "250px;", :width => "250px;" %>
+		
+		<link href='http://fonts.googleapis.com/css?family=Playfair+Display&v1' rel='stylesheet' type='text/css'>
+	
+		<p id="notice"><%= notice %></p>
+		
+	</div>
+	<div class="col col-last" id="tabs-2" style="width:93%;">
+			<div class="ui-widget">Dish: <input type="text"  size="30" id="dish_search" name="dish[name]"></div>	
+		<table border=true  class="flexigrid">
+		<thead></thead>
+		<tbody>	
 
-<p>
-  <b>Website:</b>
-  <%= @restaurant.website %>
-</p>
+<br/>	
 
-<p>
-  <b>Number:</b>
-  <%= @restaurant.number %>
-</p>
+<%= render :partial => "reviews/review", :collection => @reviews %>
 
-<p>
-  <b>Tags:</b>
-  <%= join_tags(@restaurant) %>
-</p>
-
-<h2>Reviews</h2>
-<% @restaurant.reviews.each do |review| %>
-  <%= render :partial => "reviews/review", :collection => @restaurant.reviews %>
+</tbody>
+</table>
+	</div>
+	
+	<div id="tabs-3">
+		<h2>Add a review:</h2>
+		<%= render :partial => "reviews/form" %>
+	</div>	
+	</div>
+	<div class="cl">&nbsp;</div>
+</div>
+</div>
 <% end %>
 
-<h2>Add a review:</h2>
-<%= render :partial => "reviews/form" %>
-<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
-<%= link_to 'Back', restaurants_path %>
+
+<script>
+
+
+$(document).ready(function() 
+    { 
+
+
+		    $('input#dish_search').quicksearch('table.flexigrid tbody tr');
+			
+
+
+			$( "#tabs" ).tabs({
+				cookie: {
+					// store cookie for a day, without, it would be a session cookie
+					expires: 1
+				}
+			});
+						
+       	$( ".flexigrid" ).flexigrid({
+			colModel : [
+			                        {display: 'Dish', name : 'dish-id', width : 50, sortable : true, align: 'left'},
+			                        {display: 'Review', name : 'content', width : 250, sortable : true, align: 'left'},
+			                        {display: 'Reviewer', name : 'reviewer', width : 160, sortable : true, align: 'left'},
+									{display: 'Recommend', name : 'recommend', width : 100, sortable : true, align: 'left'},
+									{display: 'Price', name : 'price', width : 50, sortable : true, align: 'left'},
+			 						{display: 'Helpful', name : 'helpful', width : 100, sortable : false, align: 'left'}
+			                ],
+		usepager: true,
+		sortname: "",
+		sortorder: "asc",
+		title: 'Dishes',
+		useRp: true,
+		rp: 15,
+		showTableToggleBtn: true
+		});
+		
+			$(".bDiv").css("height", "430px");
+			
+		 thumbnail = $('<img />').attr({
+		            src: '<%= @restaurant.website %>',
+		            alt: 'Loading thumbnail...',
+		            width: 202,
+		            height: 152
+		        });
+
+		        // Setup the tooltip with the content
+		        $('a[id="dish"]').qtip(
+		        {
+		            content: thumbnail,
+		            position: {
+		                corner: {
+		                    tooltip: 'leftMiddle'
+		                   
+		                }
+		            },
+		            style: {
+		                tip: true, // Give it a speech bubble tip with automatic corner detection
+		                name: 'blue'
+		            }
+		        });		
+		
+				<% @reviews.each do |review| %>
+				$("#review_content_<%=review.id%>").tipsy({gravity: $.fn.tipsy.autoNS});
+				<% end %>
+		
+    });
+
+
+	
+	$(function() {
+			var availableTags = [];
+				<% @dishes.each do |dish| %> 
+
+				availableTags.push("<%= dish.name %>");
+				<% end %>
+
+			$( "#dish_search, #dish_name" ).autocomplete({
+				source: availableTags
+			});
+		});
+
+		
+		
+	</script>
+	

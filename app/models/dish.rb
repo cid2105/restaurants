@@ -1,6 +1,6 @@
 class Dish < ActiveRecord::Base
-  belongs_to :restaurant
-  belongs_to :review
-  validates :name, :street, :price, :presence => true
+  has_many :reviews
+  belongs_to :restaurant, :inverse_of => :dishes
+  validates :name, :price, :presence => true
   validates_uniqueness_of :name
 end

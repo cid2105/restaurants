@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  devise :omniauthable
+  devise :omniauthable, :rememberable
+  has_many :votes
+
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     data = access_token['extra']['user_hash']
@@ -8,8 +10,13 @@ class User < ActiveRecord::Base
     else # Create a user with a stub password. 
       User.create!(:email => data["email"], :password => Devise.friendly_token[0,20]) 
     end
-  end
 
+  end
+  
+  def profile(token)
+    fb_user ||= FbGraph::User.new('me', :access_token => token).fetch
+  end
+  
    def user_info(user_data)
         {
           'nickname' => user_data["link"].split('/').last,

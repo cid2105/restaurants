@@ -1,19 +1,62 @@
-<p>
-    <b>Reviewer:</b>
-    <%= review.reviewer %>
-  </p>
- 
-  <p>
-    <b>Dish:</b>
-    <%= review.dish %>
-  </p>
+<script>
+$('#delete<%= review.id %>').click(function(e){
+  e.preventDefault();
+  alert("asdf");
+  $.post($(this).attr('href'), { _method: 'delete' });
+  $("#delete<%= review.id %>").hide();
+});
+</script>
+
+<tr id="<%= review.id %>">
+
+<td>
+    <%= review.dish.name %>
+</td>
 
 
- <p>
-   <b>Review:</b>
-   <%= review.content %>
- </p>
+ <td id="review_content_<%= review.id %>" style="text-decoration:none;" title="<%=review.content%>">
+	<% if review.content.length > 100 %>
+   <%= review.content.to_s[0..100] %>...
+	<% else %>
+	  <%= review.content %>
+	<% end %>
 
-<p> 
-<%= link_to 'Destroy', [review.restaurant, review], :confirm => 'Are you sure?', :method => :delete %>
-</p>
+ </td>
+
+<td>
+    
+    <br/><%= image_tag "#{User.find_by_name(review.reviewer).pic}", :alt => 'foo' %>
+	<br/> - <%= review.reviewer %>
+</td>
+
+<td>
+	<% if review.recommend == true %>
+	<%= image_tag "checkmark.png", :alt => 'fooz' %>
+	<% else %>
+	<%= image_tag "x.png", :alt => 'foo' %>
+	<% end %>
+</td>	
+<td>
+	<% review_price = "$"*review.price %>
+	<%= review_price %>
+</td>
+<td>
+ 	<%= image_tag "thumbs_up.png", :style => 'cursor:pointer;', :onclick => "upvote(#{review.id})" %> 	<%= image_tag "thumbs_down.png", :style => 'cursor:pointer;', :onclick => "downvote(#{review.id})"  %>
+<br/><span style="position:relative; left: 11px;" ><input type="text" style="width: 8px;" readonly="readonly" value="<%= getUpVotes(review.id) %>" id="upvotes<%= review.id%>"></span>
+<span style="position:relative; left:29px;" ><input type="text" id="downvotes<%= review.id%>" style="width: 8px;" readonly="readonly" value="<%= getDownVotes(review.id) %>"></span>
+</td>
+</tr>
+
+<script>
+
+
+function updateScore(id, ups, downs){$("#upvotes" + id).val(ups);$("#downvotes" + id).val(downs);}
+function downvote(id){$.post("<%= review_vote_url %>", { rid: id, helpful: "false"},
+function(json){updateScore(id, json.upvotes,json.downvotes);});}
+function upvote(id){$.post("<%= review_vote_url %>", { rid: id, helpful: "true"},
+function(json){updateScore(id, json.upvotes, json.downvotes);});}
+
+
+</script>
+
+

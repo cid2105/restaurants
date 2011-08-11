@@ -17,11 +17,25 @@ module ApplicationHelper
   <div id="navigation">
     <ul>
       <li><a href="#{root_path}" #{token1}><span>home</span></a></li>
-      <li><a href="#{restaurants_path}" #{token2}><span>browse</span></a></li>
-      <li><a href="#{user_omniauth_authorize_path(:facebook)}" #{token3}><span>Login</span></a></li>
-            <li><a href="#{user_omniauth_authorize_path(:facebook)}" #{token4}><span>Register</span></a></li>
-    <ul>
+      <li><a href="#{categories_path}" #{token2}><span>browse</span></a></li>
+      
 HTML
+    
+unless user_signed_in?
+    html2 = <<HTML
+      <li><a href="#{user_omniauth_authorize_path(:facebook)}" #{token3}><span>Login</span></a></li>
+            <li><a href="#{user_omniauth_authorize_path(:facebook)}" #{token4}><span>Register</span></a></li></ul>
+HTML
+            
+html += html2
+else
+      html3 = <<HTML
+        <li><a href="#{logout_path}" #{token3}><span>Logout</span></a></li>
+              </ul>
+HTML
+
+html += html3
+    end
 
 html.html_safe
 
@@ -37,6 +51,12 @@ def url_unescape(string)
 string.tr('+', ' ').gsub(/((?:%[0-9a-fA-F]{2})+)/n) do
 [$1.delete('%')].pack('H*')
 end
+end
+
+def get_location(ip)
+command = "http://www.geoiptool.com/en/?IP=#{ip}"
+cheese = system("curl #{command} | grep \"City\"")
+return cheese.to_s
 end
 
 

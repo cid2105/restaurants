@@ -1,16 +1,35 @@
-<%= form_for([@restaurant, @restaurant.reviews.build]) do |f| %>
+<%= form_for [@restaurant, @restaurant.reviews.build] do |f| %>
   <div class="field">
-    <%= f.label :reviewer %><br />
-    <%= f.text_field :reviewer %>
+	<% if defined? current_user.name %>
+    <%= f.hidden_field :reviewer, :value => current_user.name %>
+	<% end %>
   </div>
+
+<table>
+<tr >
+	<td >
 <div class="field">
     <%= f.label :dish %><br />
-    <%= f.text_field :dish %>
+	<input type="text"  size="30" id="dish_name" name="dish[name]">
+</div>
+</td><td style="padding-left: 395px;">
+<div class="field">
+    <%= f.label :price %><br />
+    <select id="dish_price" name="dish[price]">
+	<option value="1">$</option><option value="2">$$</option>
+	<option value="3">$$$</option><option value="4">$$$$</option>
+	</select>
   </div>
+</td><td style="padding-left:20px;">
+<div class="field">
+    <span style="position:relative;bottom:3px;"><%= f.label :recommend %></span><br />
+    <%= f.check_box :recommend %>
+  </div></td></tr>
+</table>
   <div class="field">
     <%= f.label :review %><br />
-    <%= f.text_area :content %>
-  </div>
+    <%= f.text_area :content, :style => "height:200px; width:100%;" %>
+  </div><br/>
   <div class="actions">
     <%= f.submit %>
   </div>

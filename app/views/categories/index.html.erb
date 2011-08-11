@@ -1,23 +1,173 @@
-<h1>Listing categories</h1>
+<% content_for :nav do %>
+<%= get_navigation("browse") %>
+<% end %>
+	
+<div class="cl">&nbsp;</div>
+<div class="col">
 <br/>
-<table border=1>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h2>Browse Categories</h2>
+</div><br/>
 
+
+
+<div class="ui-widget">
+<b>Category:</b> <input type="text"  title="Search" size="30" id="category_search">
+<span style="position:relative; left:204px;"><b>Zipcode:</b> <input type="text"  title="Search" size="30" id="zipcode_search" name="city[name]"></span></div>	
+<br/>
+<table border=1 class="flexigrid">
+<thead></thead>
+<tbody >
 <% @categories.each do |category| %>
-  <tr>
+
+  <tr onclick="showCategory(<%= category.id %>);" style="cursor:pointer;">
     <td><%= category.name %></td>
-    <td><%= link_to 'Show', category %></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
+
+<script>
+function showCategory(id)
+{
+	var zipcode = $("#zipcode_search").val();
+	var url = "http://localhost:3000/categories/" + id +  "/?zip=" + zipcode;
+	window.location = url;
+}
+</script>
+</tbody >
 </table>
 
 <br />
 
-<%= link_to 'New Category', new_category_path %>
+
+
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> 
+<script type="text/javascript"> 
+  var geocoder;
+
+  if (navigator.geolocation ) {
+	initialize();
+    navigator.geolocation.getCurrentPosition(successFunction, handle_errors);
+}
+else
+{  
+ 	yqlgeo.get('visitor', normalize_yql_response);  
+}
+//Get latitude and longitude;
+function successFunction(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    codeLatLng(lat, lng)
+}
+
+function normalize_yql_response(response)  
+{  
+    if (response.error)  
+    {  
+        var error = { code : 0 };  
+        handle_error(error);  
+        return;  
+    }  
+
+    var position = {  
+        coords :  
+        {  
+            latitude: response.place.centroid.latitude,  
+            longitude: response.place.centroid.longitude  
+        },  
+        address :  
+        {  
+            city: response.place.locality2.content,  
+            region: response.place.admin1.content,  
+            country: response.place.country.content  
+        }  
+    };  
+
+    handle_geolocation_query(position);  
+}
+function handle_errors(error)  
+{  
+    switch(error.code)  
+    {  
+        case error.PERMISSION_DENIED: alert("user did not share geolocation data");  
+        break;  
+
+        case error.POSITION_UNAVAILABLE: alert("could not detect current position");  
+        break;  
+
+        case error.TIMEOUT: alert("retrieving position timedout");  
+        break;  
+
+        default: alert("unknown error");  
+        break;  
+    }  
+}
+
+
+  function initialize() {
+    geocoder = new google.maps.Geocoder();
+  }
+
+  function codeLatLng(lat, lng) {
+	var loc, local;
+    var latlng = new google.maps.LatLng(lat, lng);
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+      console.log(results)
+        if (results[1]) 
+		{
+         //formatted address
+         local = results[0].address_components[7].short_name;
+        //find country name
+             for (var i=0; i<results[0].address_components.length; i++) {
+            for (var b=0;b<results[0].address_components[i].types.length;b++) {
+
+            //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+				if(results[0].address_components[i].short_name.length == 5 && results[0].address_components[i].short_name.match(/\d{5}/) != null)
+				{
+					local = results[0].address_components[i].short_name;
+				}
+              
+            }
+        }
+
+	 	$("#zipcode_search").val(local);
+
+        } else {
+          alert("No results found");
+        }
+      } else {
+        alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
+$(document).ready(function() 
+{
+
+	var cats = [];
+	<% Category.all.each do |category| %> 
+	cats.push("<%= category.name %>");
+	<% end %>
+
+	$( '#category_search' ).autocomplete({
+	source: cats
+	});
+
+	$('input#category_search').quicksearch('table.flexigrid tbody tr');
+	
+	$( ".flexigrid" ).flexigrid({
+		colModel : [
+		                        {display: 'Name', name : 'dish-id', width : 842, sortable : true, align: 'left'}
+		                ],
+	usepager: true,
+	sortname: "",
+	sortorder: "asc",
+	title: 'Categories',
+	useRp: true,
+	rp: 15,
+	showTableToggleBtn: true
+	});
+	$(".bDiv").css("height", "330px");
+});	
+</script>
+
+

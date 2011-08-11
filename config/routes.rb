@@ -1,11 +1,18 @@
 Blog::Application.routes.draw do
   
-
-  resources :dishes 
+  match 'categories/:id' => "categories#show"
   
+  devise_scope :user do
+    get 'logout', :to => 'devise/sessions#destroy'
+    get 'login', :to => 'devise/sessions#new'
+  end
+  
+  resources :dishes 
+
   resources :categories do
     resources :restaurnants
   end
+
 
   resources :users
   resources :categories
@@ -30,6 +37,8 @@ Blog::Application.routes.draw do
   get "home/index"
   devise_scope :user do
   get '/users/auth/facebook' => 'users/omniauth_callbacks#passthru'
+  
+  match 'restaurants/:id/vote' => 'reviews#vote', :as => :review_vote
 end
  # root :to => "home#index"
   # The priority is based upon order of creation:
@@ -87,7 +96,7 @@ end
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+
   
 
 

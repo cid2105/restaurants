@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.xml
   def index
-    @categories = Category.all
+    @categories = Category.all(:order => :name)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,13 +14,34 @@ class CategoriesController < ApplicationController
   # GET /categories/1.xml
   def show
     @category = Category.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @category }
+    @zip = params[:zip]
+    consumer = OAuth::Consumer.new( Yelp::CONSUMER_KEY,Yelp::SECRET, {:site => "http://api.yelp.com", :signature_method => "HMAC-SHA1", :scheme => :query_string})
+    access_token = OAuth::AccessToken.new( consumer, Yelp::TOKEN, Yelp::TOKEN_SECRET)
+    url = "/v2/search?location=#{@zip}&category_filter=#{@category.category_filter}"
+    data = access_token.get(url).body
+    data = JSON.parse(data) 
+    if data['code'] == '/api/status/error'
+      raise "web service error #{url}"
     end
+    data = data["businesses"]
+    #------------------ START FETCHING INFORMATION ------------ #
+    data.each do |datum|
+      attrs = {:name => datum["name"], :street => datum["location"]["address"][0], :city => datum["location"]["city"], :state => datum["location"]["state_code"], :zip => datum["location"]["postal_code"], :number => datum["display_phone"] , :website => datum["image_url"]}
+      if Restaurant.first(:conditions => attrs).nil?
+        new_rest = Restaurant.create(attrs)
+        new_rest.category = @category
+        new_rest.save
+      end
+    end
+    #------------------ END FETCHING INFORMATION ------------ #
+    
+    @restaurants = @category.restaurants
   end
 
+  def restaurant_listing
+     @category = Category.find_by_name(params[:name])
+     @restaurants = Restaurant.find_by_category_id(@category)
+  end
   # GET /categories/new
   # GET /categories/new.xml
   def new

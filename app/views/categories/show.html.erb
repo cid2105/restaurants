@@ -1,10 +1,70 @@
-<p id="notice"><%= notice %></p>
+<% content_for :nav do %>
+<%= get_navigation("browse") %>
+<% end %>
+	
+<div class="cl">&nbsp;</div>
+<div class="col">
+<br/>
+<h2>Browse <%= @category %>  Restaurants</h2>
+</div><br/>
 
-<p>
-  <b>Name:</b>
-  <%= @category.name %>
-</p>
+
+<div class="ui-widget">
+Restaurant: <input type="text"  title="Search" size="30" id="restaurant_search" name="dish[name]">
+<span style="position:relative; left:200px;">Zipcode: <input type="text"  title="Search" size="30" id="zipcode_search" name="city[name]"></span></div>
 
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<br/>
+<table border=1 class="flexigrid">
+<thead></thead>
+<tbody >
+<% @restaurants.each do |restaurant| %>
+
+  <tr onclick="window.location = '<%= restaurant_url(restaurant) %>';" style="cursor:pointer;">
+    <td><%= restaurant.name %></td>
+    <td><%= restaurant.street %></td>
+    <td><%= restaurant.city %></td>
+    <td><%= restaurant.state %></td>
+    <td><%= restaurant.zip %></td>
+    <td><%= restaurant.number %></td>
+  </tr>
+<% end %>
+</tbody >
+</table>
+
+<br />
+
+<%= link_to 'New Restaurant', new_restaurant_path %>
+
+
+
+<script>
+
+$(document).ready(function() 
+{
+	
+	
+	$('input#restaurant_search').quicksearch('table.flexigrid tbody tr');
+	
+	$( ".flexigrid" ).flexigrid({
+		colModel : [
+		                        {display: 'Name', name : 'dish-id', width : 218, sortable : true, align: 'left'},
+		                        {display: 'Street', name : 'content', width : 218, sortable : true, align: 'left'},
+		                        {display: 'City', name : 'reviewer', width : 153, sortable : true, align: 'left'},
+								{display: 'State', name : 'recommend', width : 30, sortable : true, align: 'left'},
+								{display: 'Zip', name : 'price', width : 50, sortable : true, align: 'left'},
+		 						{display: 'Number', name : 'number', width : 110, sortable : false, align: 'left'}
+		                ],
+	usepager: true,
+	sortname: "",
+	sortorder: "asc",
+	title: 'Restaurants',
+	useRp: true,
+	rp: 15,
+	showTableToggleBtn: true
+	});
+	$(".bDiv").css("height", "300px");
+});	
+</script>
+
+

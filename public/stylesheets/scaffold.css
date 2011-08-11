@@ -3,8 +3,8 @@
 body, html { height: 100%; }
 
 body {
-	background: #e1e5e8;
-	font-family: "Georgia", Tahoma, Sans-Serif;
+	background: white;
+    	font-family: "Georgia", Tahoma, Sans-Serif;
 	font-size: 12px;
 	line-height: 18px;
 	color: #888;
@@ -20,7 +20,7 @@ a img { border: 0; }
 
 h2 { font-size: 19px; line-height: 1; font-weight: normal; color: #464646; font-family: "Trebuchet MS", Tahoma, Sans-Serif; margin-bottom: 5px; }
 
-p { padding-bottom: 18px; }
+p { padding-bottom: 3px; }
 
 .left, .alignleft { float: left; display: inline; }
 .right, .alignright { float: right; display: inline; }
@@ -36,7 +36,7 @@ p { padding-bottom: 18px; }
 #page { width: 874px; margin: 0 auto; }
 #page { padding: 0 28px; min-height: 100%; height: auto !important; height: 100%; background: url(../images/bg.gif) repeat-y center 0; }
 
-#top { padding: 20px 0 16px; }
+#top { padding: 0px 0 16px; }
 
 #logo { float: left; display: inline; width: 295 px; font-size: 0; line-height: 0; }
 #logo a { display: block; height: 67px; text-indent: -4000px; background: url(../images/logo.gif); }
@@ -95,3 +95,8 @@ h3.txt-247 { background-image: url(../images/txt-247.gif); }
 #footer a { color: #fff; text-decoration: none; }
 #footer a:hover { color: #237087; }
 #footer span { margin: 0 6px; }
+
+div.bDiv
+{
+	max-height:800px; 
+}

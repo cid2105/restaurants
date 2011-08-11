@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110627015434) do
+ActiveRecord::Schema.define(:version => 20110811041418) do
 
   create_table "access_tokens", :force => true do |t|
     t.integer  "user_id"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20110627015434) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "category_filter"
   end
 
   create_table "dishes", :force => true do |t|
@@ -38,7 +39,21 @@ ActiveRecord::Schema.define(:version => 20110627015434) do
     t.integer  "restaurant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "review_id"
   end
+
+  create_table "rails_admin_histories", :force => true do |t|
+    t.string   "message"
+    t.string   "username"
+    t.integer  "item"
+    t.string   "table"
+    t.integer  "month",      :limit => 2
+    t.integer  "year",       :limit => 5
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
   create_table "restaurants", :force => true do |t|
     t.string   "name"
@@ -52,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20110627015434) do
     t.string   "state"
     t.float    "price"
     t.text     "description"
+    t.integer  "category_id"
   end
 
   create_table "reviews", :force => true do |t|
@@ -60,11 +76,11 @@ ActiveRecord::Schema.define(:version => 20110627015434) do
     t.integer  "restaurant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "dish"
     t.integer  "helpful"
     t.integer  "unhelpful"
     t.float    "price"
     t.boolean  "recommend"
+    t.integer  "dish_id"
   end
 
   create_table "sessions", :force => true do |t|
@@ -104,9 +120,18 @@ ActiveRecord::Schema.define(:version => 20110627015434) do
     t.string   "name"
     t.string   "url"
     t.string   "pic"
+    t.integer  "voted_on_review"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "votes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "review_id"
+    t.integer  "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

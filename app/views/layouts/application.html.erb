@@ -4,16 +4,11 @@
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<title>Meal Mecca</title>
 	<%= csrf_meta_tag %>
-     <%= stylesheet_link_tag :all %>
-    
-	<%= javascript_include_tag "jquery-1.4.1.min" %>	
-	<%= javascript_include_tag "jquery-func" %>
-    <%= javascript_include_tag "jquery.jcarousel.pack" %>
+    <%= render 'layouts/javascripts' %>
     <%= render 'layouts/stylesheets' %>
-
-<%= javascript_include_tag :defaults %>
 </head>
 <body>
+
     <p class="notice"><%= notice %></p>
        <p class="alert"><%= alert %></p>
 
@@ -22,13 +17,13 @@
 	<div id="top">
 		<div class="cl">&nbsp;</div>
 <%= image_tag "logo.gif", :alt => 'foo' %>
-		<form action="" method="post" id="search">
-			<div class="field-holder">
-				<input type="text" class="field" value="Search" title="Search" />
+		<% form_tag restaurants_path, :method => "get", :id => "search" do %>
+			<div class="field-holder" style="" >
+				<input type="text" id="restaurant_name" name="restaurant[name]"  class="field" placeholder="Search" title="Search" />
 			</div>
 			<input type="submit" class="button" value="Search" />
 			<div class="cl">&nbsp;</div>
-		</form>
+		<% end %>
 		<div class="cl">&nbsp;</div>
 		<%= yield :nav %>	
 	</div>
@@ -51,8 +46,8 @@
 	<!-- END Main -->
 	<!-- Footer -->
 	<div id="footer">
-		<p class="right">&copy; 2010 - CompanyName &nbsp; Design by <a href="http://chocotemplates.com" target="_blank" title="The Sweetest CSS Templates WorldWide">Chocotemplates.com</a></p>
-		<p><a href="#">Home</a><span>&nbsp;</span><a href="#">About Us</a><span>&nbsp;</span><a href="#">Services</a><span>&nbsp;</span><a href="#">Solutions</a><span>&nbsp;</span><a href="#">Support</a><span>&nbsp;</span><a href="#">Partners</a><span>&nbsp;</span><a href="#">Contact</a></p>
+		<p class="right">&copy; 2011 HelloWorld Enterprises</p>
+		<p><a href="#">About Us</a><span>&nbsp;</span><a href="#">Services</a><span>&nbsp;</span><a href="#">Support</a><span>&nbsp;</span><a href="#">Contact</a></p>
 		<div class="cl">&nbsp;</div>
 	</div>
 	<!-- END Footer -->
