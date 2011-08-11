@@ -62,3 +62,4 @@ gem "omniauth"
 gem 'fb_graph'
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'yelp'
+gem 'fastercsv', '>=1.5.4'
