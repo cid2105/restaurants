@@ -9,7 +9,7 @@ class Restaurant < ActiveRecord::Base
        :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
        
   def to_s
-    "#{self.name}"
+    "#{self.name.titleize}"
   end
   
   def formatted_address

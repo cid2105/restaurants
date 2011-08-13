@@ -11,6 +11,9 @@
 	<ul id="navigation" style="border-color:white;">
 		<li><a href="#tabs-1">Reviews</a></li>
 		<li><a href="#tabs-2">Add a Review</a></li>
+		<div class="restaurant_nav">
+		<a class="restaurant_link" href="<%= restaurant_path(@dish.restaurant) %>"><%=@dish.restaurant %></a> >> <a class="restaurant_link" href="<%= dish_path(@dish) %>"><%= @dish %>
+		</div>
 	</ul>
 	
 <div class="cols two-cols">

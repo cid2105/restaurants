@@ -4,6 +4,10 @@ class Dish < ActiveRecord::Base
   validates :name, :price, :presence => true
   validates_uniqueness_of :name
   
+  def to_s
+    name.capitalize
+  end
+  
   def top_review
     self.reviews.all.sort_by{ |review| review.getScore }.reverse[0]
   end

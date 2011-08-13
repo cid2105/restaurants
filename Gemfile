@@ -67,5 +67,5 @@ gem "oa-core"
 gem "omniauth"
 gem "haml"
 gem 'fb_graph'
-gem 'yelp'
+gem 'jonnii-yelp'
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git', :branch => "rails-3.0"

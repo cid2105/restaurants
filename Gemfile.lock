@@ -82,6 +82,8 @@ GEM
     haml (3.1.2)
     httpclient (2.2.1)
     i18n (0.5.0)
+    jonnii-yelp (0.1.1)
+      json (>= 1.1.1)
     json (1.5.3)
     mail (2.2.19)
       activesupport (>= 2.3.6)
@@ -200,8 +202,6 @@ GEM
       rack (>= 1.0)
       rack-test (>= 0.5.3)
     will_paginate (3.0.0)
-    yelp (1.0.0)
-      json (>= 1.1.1)
 
 PLATFORMS
   ruby
@@ -217,6 +217,7 @@ DEPENDENCIES
   fb_graph
   gravatar_image_tag
   haml
+  jonnii-yelp
   nokogiri
   oa-core
   oauth
@@ -234,4 +235,3 @@ DEPENDENCIES
   sqlite3-ruby (= 1.3.2)
   webrat
   will_paginate
-  yelp

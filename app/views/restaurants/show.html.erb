@@ -8,11 +8,16 @@
 	<% content_for :three_column do %>
 
 <div id="tabs">
+
 	<ul id="navigation" style="border-color:white;">
 		<li><a href="#tabs-1">About</a></li>
 		<li><a href="#tabs-2">Dishes</a></li>
 		<li><a href="#tabs-3">Reviews</a></li>
+		<div class="restaurant_nav">
+		<a class="restaurant_link" href="<%= restaurant_path(@restaurant) %>"><%=@restaurant %></a> 
+		</div>
 	</ul>
+	
 	
 <div class="cols two-cols">
 	<div class="cl">&nbsp;</div>

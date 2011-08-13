@@ -61,13 +61,13 @@ p { padding-bottom: 3px; }
 
 #header { padding-bottom: 10px; }
 
-#slider { height: 327px; background: url(../images/slider.gif) no-repeat 0 0; position: absolute; }
+#slider { height: 327px; background: url(../images/slider.gif) no-repeat 0 0; position: relative; }
 #slider .slider-nav a { display: block; width: 18px; height: 49px; font-size: 0; line-height: 0; text-indent: -4000px; position: absolute; top: 120px; }
 #slider .slider-nav a.prev { left: 0; background: url(../images/button-prev.gif); }
 #slider .slider-nav a.next { right: 0; background: url(../images/button-next.gif); }
 
 #slider-holder { height: 327px; }
-#slider-holder .jcarousel-clip { height: 327px; width: 874px; position: relative; overflow: hidden; }
+#slider-holder .jcarousel-clip { height: 327px; width: 874px; position: absolute; overflow: hidden; }
 #slider-holder .slide-image { float: right; display: inline; }
 #slider-holder .slide-info { float: left; display: inline; width: 424px; padding-top: 23px; }
 #slider-holder .slide-info p { padding-bottom: 8px; }
@@ -120,4 +120,26 @@ h3.txt-247 { background-image: url(../images/txt-247.gif); }
 div.bDiv
 {
 	max-height:800px; 
+}
+
+
+.restaurant_nav, .restaurant_nav:hover
+{
+	float: right;
+	font-size: 18px;
+	position: relative;
+	text-decoration: none;
+	top: 8px;
+	color:white;
+}
+
+.restaurant_nav .restaurant_link
+{
+color:white;
+text-decoration: none;
+}
+
+.restaurant_nav .restaurant_link:hover
+{
+	text-decoration: underline;
 }
