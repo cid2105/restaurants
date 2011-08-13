@@ -1,6 +1,6 @@
 class Yelp
 
-  if RAILS_ENV.eql?("development")
+  if RAILS_ENV.eql?("developments")
    CONSUMER_KEY = "fHxw-I2WocX1BncmlzYyBQ"
    SECRET = "XDOnHAoPcNJiFXbfNxZAdvj_A7g"
    TOKEN = "6WKZE45RHPYcK1a39QjwMaBwxD_v8BO_"
