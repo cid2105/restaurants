@@ -6,10 +6,11 @@
 	<%= csrf_meta_tag %>
     <%= render 'layouts/javascripts' %>
     <%= render 'layouts/stylesheets' %>
+
 </head>
 <body>
 
-    <p class="notice"><%= notice %></p>
+   <!-- <p class="notice"><%= notice %></p> -->
        <p class="alert"><%= alert %></p>
 
 <div id="page" class="shell">
@@ -35,6 +36,7 @@
 	<!-- END Header -->
 	<!-- Main -->
 	<div id="main">
+
 	<%=  yield %>
 		<!-- Three Column Content -->
 		<%= yield :three_column %>

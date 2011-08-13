@@ -1,8 +1,7 @@
 class ReviewsController < ApplicationController
-
   
   def create
-    @restaurant = Restaurant.find(params[:restaurant_id])
+    @restaurant = Restaurant.find(params["restaurant"]["id"])
     params["review"]["price"] = params["dish"]["price"]
     puts params[:review]["price"]
     @review = @restaurant.reviews.create!(params["review"])

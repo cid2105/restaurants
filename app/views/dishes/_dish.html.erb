@@ -1,0 +1,47 @@
+<tr id="<%= dish.id %>" style="cursor:pointer;" onclick="window.location = '<%= restaurant_dish_url(@restaurant, dish) %>';">
+
+<td>
+    <%= dish.name %>
+</td>
+
+
+ <td id="review_content_<%= dish.id %>" style="text-decoration:none;" title="<%=dish.top_review.content%>">
+	
+	<div style="position:relative; left: 100px;">
+		<!-- color: #18F -->
+	<p class="bubble" style="position: absolute; color: #333;font-size: 11px; font-family: 'Comfortaa', cursive;">
+	<% if dish.top_review.content.length > 100 %>
+   <%= dish.content.to_s[0..100] %>...
+	<% else %>
+	 <%= dish.top_review.content %>
+	<% end %>
+	<br/><span style="color:#777777; font-size:9px;"> - <%= dish.top_review.reviewer %>
+	</p>
+	</div>
+	<br/><span id="profile_image" style="position:relative; left: 5px; bottom:10px;"><%= image_tag "#{User.find_by_name(dish.top_review.reviewer).pic}", :alt => 'foo' %></span>
+
+	
+ </td>
+
+<td style="text-align:right;">
+	<% if dish.recommend? %>
+	<%= image_tag "checkmark.png", :alt => 'fooz', :style => "position:relative; left: 26px; top:20px;" %>
+	<% else %>
+	
+	<%= image_tag "x.png", :alt => 'foo', :style => "position:relative; left: 26px; top:20px;" %>
+	<% end %>
+	<b style="display:inline-block; position:relative; top: 35px; right:5px;"><%= dish.getAverageScore * 100 %>%</b>
+</td>	
+<td>
+	<div style="font-size:20px; position:relative; top:23px; left: 0px;">
+	<% review_price =  "$" * dish.getAveragePrice.to_i %>
+	<%= review_price %>
+	</div>
+</td>
+</tr>
+
+<script>
+
+</script>
+
+

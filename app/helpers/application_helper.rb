@@ -20,10 +20,11 @@ module ApplicationHelper
       <li><a href="#{categories_path}" #{token2}><span>browse</span></a></li>
       
 HTML
-    
+
+image = image_tag "facebook_icon.png", :style => "position: relative; top: 2px;"
 unless user_signed_in?
     html2 = <<HTML
-      <li><a href="#{user_omniauth_authorize_path(:facebook)}" #{token3}><span>Login</span></a></li>
+      <li><a href="#{user_omniauth_authorize_path(:facebook)}" #{token3}><span style="width:80px;">#{image}<div style="position:relative; bottom:32px; left: 45px;">Login</div></span></a></li>
 HTML
             
 html += html2

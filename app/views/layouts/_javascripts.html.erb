@@ -4,6 +4,7 @@
 <% end %>
 
 <script>
+
 $(function() {
 var tags = [];
 <% Restaurant.all.each do |restaurant| %> 
@@ -13,5 +14,8 @@ tags.push("<%= restaurant.name %>, <%= restaurant.formatted_address %>");
 $( 'input[title="Search"]' ).autocomplete({
 source: tags
 });
+
+
+
 });
 </script>

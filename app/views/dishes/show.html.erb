@@ -1,25 +1,132 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @dish.name %>
-</p>
-
-<p>
-  <b>Pic:</b>
-  <%= @dish.pic %>
-</p>
-
-<p>
-  <b>Price:</b>
-  <%= @dish.price %>
-</p>
-
-<p>
-  <b>Restaurant:</b>
-  <%= @dish.restaurant %>
-</p>
+<% content_for :nav do %>
+<%= get_navigation("browse") %>
+<% end %>
+<br/>
 
 
-<%= link_to 'Edit', edit_dish_path(@dish) %> |
-<%= link_to 'Back', dishes_path %>
+
+	<% content_for :three_column do %>
+
+<div id="tabs">
+	<ul id="navigation" style="border-color:white;">
+		<li><a href="#tabs-1">Reviews</a></li>
+		<li><a href="#tabs-2">Add a Review</a></li>
+	</ul>
+	
+<div class="cols two-cols">
+	<div class="cl">&nbsp;</div>
+
+	<div class="col col-last" id="tabs-1" style="width:93%;">
+			<div class="ui-widget">Search: <input type="text"  size="30" id="dish_search" name="review[name]"></div>	
+		<table border=true  class="flexigrid">
+		<thead></thead>
+		<tbody>	
+
+<br/>	
+
+
+<%= render :partial => "reviews/review", :collection => @dish.reviews %>
+
+
+</tbody>
+</table>
+	</div>
+	
+	<div id="tabs-2">
+		<h2 style="">Add a review:</h2>
+		<% if user_signed_in? %>
+		<%= render :partial => "reviews/form" %>
+		<% else %>
+		<br/>
+		<div class="fberrorbox">Error: You must sign in via facebook login if you wish to post a review.</div> 
+		
+		<br/>
+		<a style="text-decoration:none;" href="<%= user_omniauth_authorize_path(:facebook) %>"><div style="display:inline-block;"><%= image_tag "facebook_icon.png" %></div><div class="underline_hover" style="display:inline-block; position:relative; left:7px; bottom:5px;"> <h1> Sign in </h1></div></a>
+		<% end %>
+	</div>
+		
+	</div>
+	<div class="cl">&nbsp;</div>
+</div>
+</div>
+<% end %>
+
+
+<script>
+
+
+$(document).ready(function() 
+    { 
+
+			
+		    $('input#dish_search').quicksearch('table.flexigrid tbody tr');
+			
+
+
+			$( "#tabs" ).tabs({
+				cookie: {
+					// store cookie for a day, without, it would be a session cookie
+					expires: 1
+				}
+			});
+						
+       	$( ".flexigrid" ).flexigrid({
+			colModel : [
+			                        {display: 'Review', name : 'content', width : 500, sortable : true, align: 'left'},
+			                        //{display: 'Reviewer', name : 'reviewer', width : 160, sortable : true, align: 'left'},
+									{display: 'Recommend', name : 'recommend', width : 80, sortable : true, align: 'left'},
+									{display: 'Price', name : 'price', width : 71, sortable : true, align: 'left'},
+			 						{display: 'Helpful', name : 'helpful', width : 106, sortable : false, align: 'left'}
+			                ],
+		usepager: true,
+		sortname: "",
+		sortorder: "asc",
+		title: '<%= @dish.name.titleize %>',
+		useRp: true,
+		rp: 15,
+		showTableToggleBtn: true
+		});
+		
+			$(".bDiv").css("height", "430px");
+			
+
+		        // Setup the tooltip with the content
+		        $('a[id="dish"]').qtip(
+		        {
+		            content: thumbnail,
+		            position: {
+		                corner: {
+		                    tooltip: 'leftMiddle'
+		                   
+		                }
+		            },
+		            style: {
+		                tip: true, // Give it a speech bubble tip with automatic corner detection
+		                name: 'blue'
+		            }
+		        });		
+		
+				<% @dish.reviews.each do |review| %>
+				$("#review_content_<%=review.id%>").tipsy({gravity: $.fn.tipsy.autoNS});
+				<% end %>
+				
+				
+		
+    });
+
+
+	
+	$(function() {
+			var availableTags = [];
+				<% @dish.reviews.each do |reviews| %> 
+				availableTags.push("<%= reviews.reviewer %>");
+				<% end %>
+
+			$( "#review_search, #review_name" ).autocomplete({
+				source: availableTags
+			});
+		});
+
+		
+	</script>
+	

@@ -10,8 +10,8 @@
 <div id="tabs">
 	<ul id="navigation" style="border-color:white;">
 		<li><a href="#tabs-1">About</a></li>
-		<li><a href="#tabs-2">Reviews</a></li>
-		<li><a href="#tabs-3">Add a Review</a></li>
+		<li><a href="#tabs-2">Dishes</a></li>
+		<li><a href="#tabs-3">Reviews</a></li>
 	</ul>
 	
 <div class="cols two-cols">
@@ -27,11 +27,11 @@
 		<a id="dish"><h3><span><%= @restaurant %></span></h3></a>
 		<p>&nbsp;</p>
 		<p>
-		  <b>Address:</b>
-		  <span style="color:#ccc; font-size:10px;"><%= @restaurant.formatted_address %></span>
+		  <b style="font-size:15px;">Address:</b>
+		  <span style="font-size:13px;"><%= @restaurant.formatted_address %></span>
 		  <br/>
-		  <b>Number:</b>
-		  <span style="color:#ccc; font-size:10px;"><%= @restaurant.number %></span>
+		  <b style="font-size:15px;">Number:</b>
+		  <span style="font-size:13px;"><%= @restaurant.number %></span>
 		</p>
 				<p>&nbsp;</p>
 		
@@ -53,49 +53,61 @@
 
 <br/>	
 
-<%= render :partial => "reviews/review", :collection => @reviews %>
+
+<%= render :partial => "dishes/dish", :collection => @dishes %>
+
 
 </tbody>
 </table>
 	</div>
 	
 	<div id="tabs-3">
-		<h2>Add a review:</h2>
-		<%= render :partial => "reviews/form" %>
-	</div>	
+		<h2>All Dish Reviews</h2><br/>
+<div class="ui-widget">Search: <input type="text"  size="30" id="review_search" name="review[name]"></div>
+<table border=true  class="flexi2">
+<thead></thead>
+<tbody>	
+
+<br/>	
+
+		<%= render :partial => "reviews/review", :collection => @reviews, :locals => { :dish_name => true }  %>
+	</tbody>
+	</table>		
 	</div>
 	<div class="cl">&nbsp;</div>
 </div>
 </div>
 <% end %>
 
-
+	
 <script>
 
 
 $(document).ready(function() 
     { 
-
-
+			
+		
+			$( "#tabs" ).tabs({
+				cookie: {
+					// store cookie for a day, without, it would be a session cookie
+					expires: 10
+				}
+			});
+			
 		    $('input#dish_search').quicksearch('table.flexigrid tbody tr');
 			
 
 
-			$( "#tabs" ).tabs({
-				cookie: {
-					// store cookie for a day, without, it would be a session cookie
-					expires: 1
-				}
-			});
+			
 						
        	$( ".flexigrid" ).flexigrid({
 			colModel : [
-			                        {display: 'Dish', name : 'dish-id', width : 50, sortable : true, align: 'left'},
-			                        {display: 'Review', name : 'content', width : 250, sortable : true, align: 'left'},
-			                        {display: 'Reviewer', name : 'reviewer', width : 160, sortable : true, align: 'left'},
-									{display: 'Recommend', name : 'recommend', width : 100, sortable : true, align: 'left'},
-									{display: 'Price', name : 'price', width : 50, sortable : true, align: 'left'},
-			 						{display: 'Helpful', name : 'helpful', width : 100, sortable : false, align: 'left'}
+			                        {display: 'Dish', name : 'dish-id', width : 125, sortable : true, align: 'left'},
+			                        {display: 'Top Review', name : 'content', width : 497, sortable : true, align: 'left'},
+			                        //{display: 'Reviewer', name : 'reviewer', width : 160, sortable : true, align: 'left'},
+									{display: 'Recommend', name : 'recommend', width : 85, sortable : true, align: 'left'},
+									{display: 'Price', name : 'price', width : 47, sortable : true, align: 'left'},
+			 						//{display: 'Helpful', name : 'helpful', width : 100, sortable : false, align: 'left'}
 			                ],
 		usepager: true,
 		sortname: "",
@@ -105,6 +117,29 @@ $(document).ready(function()
 		rp: 15,
 		showTableToggleBtn: true
 		});
+		
+		$( ".flexi2" ).flexigrid({
+			colModel : [
+									{display: 'Dish', name : 'dish-id', width : 110, sortable : true, align: 'left'},
+			                        {display: 'Review', name : 'content', width : 375, sortable : true, align: 'left'},
+									{display: 'Recommend', name : 'recommend', width : 80, sortable : true, align: 'left'},
+									{display: 'Price', name : 'price', width : 71, sortable : true, align: 'left'},
+			 						{display: 'Helpful', name : 'helpful', width : 112.3, sortable : false, align: 'left'}
+			                ],
+		usepager: true,
+		sortname: "",
+		sortorder: "asc",
+		title: 'Reviews',
+		useRp: true,
+		rp: 15,
+		showTableToggleBtn: true
+		});
+
+		
+	    $('input#review_search').quicksearch('table.flexi2 tbody tr');			
+		
+		
+		
 		
 			$(".bDiv").css("height", "430px");
 			
@@ -131,9 +166,10 @@ $(document).ready(function()
 		            }
 		        });		
 		
-				<% @reviews.each do |review| %>
-				$("#review_content_<%=review.id%>").tipsy({gravity: $.fn.tipsy.autoNS});
+				<% @dishes.each do |dish| %>
+				$("#review_content_<%=dish.id%>").tipsy({gravity: $.fn.tipsy.autoNS});
 				<% end %>
+				$("[rel*=tipsy]").tipsy({gravity: $.fn.tipsy.autoNS});
 		
     });
 
@@ -142,7 +178,7 @@ $(document).ready(function()
 	$(function() {
 			var availableTags = [];
 				<% @dishes.each do |dish| %> 
-
+				
 				availableTags.push("<%= dish.name %>");
 				<% end %>
 
@@ -151,7 +187,6 @@ $(document).ready(function()
 			});
 		});
 
-		
 		
 	</script>
 	

@@ -23,7 +23,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1.xml
   def show
     @restaurant = Restaurant.find(params[:id])
-    @dishes = @restaurant.dishes
+    @dishes = @restaurant.dishes.sort_by(&:name)
     @reviews = @restaurant.reviews.all.sort_by{ |review| review.getScore }.reverse
     respond_to do |format|
       format.html # show.html.erb

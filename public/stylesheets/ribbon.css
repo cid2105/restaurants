@@ -18,8 +18,8 @@
     -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.55);
     box-shadow: 0px 0px 3px rgba(0,0,0,0.55);
     background: #424242;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#6a6b6b), to(#424242));
-    background-image: -moz-linear-gradient(top,#6a6a6a,#424242);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#1BF), to(#16F));
+    background-image: -moz-linear-gradient(top,#1BF,#16F);
     color: #fff;
     font-size: 90%;
 }

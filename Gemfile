@@ -2,25 +2,30 @@ source 'http://rubygems.org'
 
 gem 'activesupport', '3.0.9'
 gem 'rails', '3.0.9'
-gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
 
-gem 'gravatar_image_tag', '1.0.0.pre2'
-gem 'will_paginate', '3.0.pre2'
+gem 'gravatar_image_tag'
+gem 'will_paginate'
+gem 'railties'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 #gem 'sqlite3'
 
 group :development do
-	gem 'rspec-rails', '2.5.0'
+	gem 'rspec-rails'
 	gem 'annotate-models', '1.0.4'
 	 gem 'faker', '0.3.1'
+	gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
+end
+
+group :production do 
+	gem 'pg'
 end
 
 group :test do
-	gem 'rspec', '2.5.0'
-	gem 'webrat', '0.7.1'
-	gem 'factory_girl_rails', '1.0'
+	gem 'rspec'
+	gem 'webrat'
+#	gem 'factory_girl_rails', '1.0'
 end
 
 # Use unicorn as the web server
@@ -39,7 +44,7 @@ end
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
-gem 'ZenTest'
+
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
@@ -48,18 +53,17 @@ gem 'ZenTest'
 # end
 
 # extra
+gem "nokogiri"
 gem "ruby-openid"
 gem "rack-openid", ">=0.2.1", :require => "rack/openid"
 gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
 gem "oauth"
 gem "authlogic-connect"
 gem "rails3-generators"
-gem "haml"
-gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
-#gem 'oauth2', :git => 'git://github.com/intridea/oauth2.git'
+gem 'devise'
+gem 'oauth2'
 gem "oa-core"
 gem "omniauth"
 gem 'fb_graph'
-gem 'rails_admin'
 gem 'yelp'
-gem 'fastercsv', '>=1.5.4'
+gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git', :branch => "rails-3.0"

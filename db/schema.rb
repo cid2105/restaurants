@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110811041418) do
+ActiveRecord::Schema.define(:version => 20110813061458) do
 
   create_table "access_tokens", :force => true do |t|
     t.integer  "user_id"
@@ -101,11 +101,11 @@ ActiveRecord::Schema.define(:version => 20110811041418) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "", :null => false
+    t.string   "email",                                 :default => "",    :null => false
     t.string   "password"
     t.string   "password_confirmation"
     t.string   "reset_password_token"
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "",    :null => false
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer  "sign_in_count",                         :default => 0
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20110811041418) do
     t.string   "url"
     t.string   "pic"
     t.integer  "voted_on_review"
+    t.boolean  "admin",                                 :default => false, :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

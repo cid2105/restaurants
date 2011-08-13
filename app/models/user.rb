@@ -1,7 +1,11 @@
 class User < ActiveRecord::Base
   devise :omniauthable, :rememberable
   has_many :votes
+  after_initialize :init
 
+  def init
+    self.admin  ||= false          #will set the default value only if it's nil
+  end
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     data = access_token['extra']['user_hash']

@@ -1,4 +1,4 @@
-<%= form_for [@restaurant, @restaurant.reviews.build] do |f| %>
+<%= form_for [@dish, @dish.reviews.build] do |f| %>
   <div class="field">
 	<% if defined? current_user.name %>
     <%= f.hidden_field :reviewer, :value => current_user.name %>
@@ -10,7 +10,7 @@
 	<td >
 <div class="field">
     <%= f.label :dish %><br />
-	<input type="text"  size="30" id="dish_name" name="dish[name]">
+	<input type="text"  size="30" id="dish_name" value="<%= @dish.name %>" name="dish[name]">
 </div>
 </td><td style="padding-left: 395px;">
 <div class="field">
@@ -30,6 +30,9 @@
     <%= f.label :review %><br />
     <%= f.text_area :content, :style => "height:200px; width:100%;" %>
   </div><br/>
+	<div class="field">
+		<input type="hidden" name="restaurant[id]" value="<%= @dish.restaurant.id %>">
+	</div>
   <div class="actions">
     <%= f.submit %>
   </div>

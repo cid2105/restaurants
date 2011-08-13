@@ -1,5 +1,7 @@
 Blog::Application.routes.draw do
   
+
+ 
   match 'categories/:id' => "categories#show"
   
   devise_scope :user do
@@ -7,7 +9,9 @@ Blog::Application.routes.draw do
     get 'login', :to => 'devise/sessions#new'
   end
   
-  resources :dishes 
+  resources :dishes do
+    resources :reviews
+  end
 
   resources :categories do
     resources :restaurnants
@@ -97,7 +101,7 @@ end
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
 
-  
+
 
 
 end

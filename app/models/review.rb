@@ -1,6 +1,6 @@
 class Review < ActiveRecord::Base
   belongs_to :restaurant
-  belongs_to :dish
+  belongs_to :dish, :inverse_of => :reviews
  
   has_many :votes
   

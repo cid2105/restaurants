@@ -1,49 +1,45 @@
-<script>
-$('#delete<%= review.id %>').click(function(e){
-  e.preventDefault();
-  alert("asdf");
-  $.post($(this).attr('href'), { _method: 'delete' });
-  $("#delete<%= review.id %>").hide();
-});
-</script>
 
-<tr id="<%= review.id %>">
+<tr id="<%= review.id %>"  style="cursor:pointer;" onclick="window.location = '<%= restaurant_dish_url(review.restaurant, review.dish) %>';">
 
-<td>
-    <%= review.dish.name %>
-</td>
+	<% if defined? dish_name %>
+	<td><%= review.dish.name %></td>
+	<% end %>
 
 
- <td id="review_content_<%= review.id %>" style="text-decoration:none;" title="<%=review.content%>">
+ <td rel="tipsy" id="review_content_<%= review.id %>" style="text-decoration:none;" title="<%=review.content%>">
+	<div style="position:relative; left: 100px;">
+		<!-- color: #18F -->
+	<p class="bubble" style="position: absolute; color: #333;font-size: 11px; font-family: 'Comfortaa', cursive;">
 	<% if review.content.length > 100 %>
    <%= review.content.to_s[0..100] %>...
 	<% else %>
-	  <%= review.content %>
+	 <%= review.content %>
 	<% end %>
-
+	<br/><span style="color:#777777; font-size:9px;"> - <%= review.reviewer %>
+	</p>
+	</div>
+	<br/><span id="profile_image" style="position:relative; left: 20px; bottom:15px;"><%= image_tag "#{User.find_by_name(review.reviewer).pic}", :alt => 'foo' %></span>
  </td>
 
-<td>
-    
-    <br/><%= image_tag "#{User.find_by_name(review.reviewer).pic}", :alt => 'foo' %>
-	<br/> - <%= review.reviewer %>
-</td>
+
 
 <td>
 	<% if review.recommend == true %>
-	<%= image_tag "checkmark.png", :alt => 'fooz' %>
+	<%= image_tag "checkmark.png", :alt => 'fooz', :style => "position:relative; left: 24px; top:20px;" %>
 	<% else %>
-	<%= image_tag "x.png", :alt => 'foo' %>
+	<%= image_tag "x.png", :alt => 'foo', :style => "position:relative; left: 24px; top:20px;" %>
 	<% end %>
 </td>	
 <td>
+	<div style="font-size:20px; position:relative; top:23px; left: 0px;">
 	<% review_price = "$"*review.price %>
 	<%= review_price %>
+	</div>
 </td>
 <td>
  	<%= image_tag "thumbs_up.png", :style => 'cursor:pointer;', :onclick => "upvote(#{review.id})" %> 	<%= image_tag "thumbs_down.png", :style => 'cursor:pointer;', :onclick => "downvote(#{review.id})"  %>
-<br/><span style="position:relative; left: 11px;" ><input type="text" style="width: 8px;" readonly="readonly" value="<%= getUpVotes(review.id) %>" id="upvotes<%= review.id%>"></span>
-<span style="position:relative; left:29px;" ><input type="text" id="downvotes<%= review.id%>" style="width: 8px;" readonly="readonly" value="<%= getDownVotes(review.id) %>"></span>
+<br/><span style="position:relative; left: 11px; font-family: Century Gothic;" ><input type="text" style="width: 8px;" readonly="readonly" value="<%= getUpVotes(review.id) %>" id="upvotes<%= review.id%>"></span>
+<span style="position:relative; left:29px; font-family: Century Gothic;" ><input type="text" id="downvotes<%= review.id%>" style="width: 8px;" readonly="readonly" value="<%= getDownVotes(review.id) %>"></span>
 </td>
 </tr>
 

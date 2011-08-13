@@ -24,6 +24,7 @@ class CategoriesController < ApplicationController
       raise "web service error #{url}"
     end
     data = data["businesses"]
+    if !data.nil?
     #------------------ START FETCHING INFORMATION ------------ #
     data.each do |datum|
       attrs = {:name => datum["name"], :street => datum["location"]["address"][0], :city => datum["location"]["city"], :state => datum["location"]["state_code"], :zip => datum["location"]["postal_code"], :number => datum["display_phone"] , :website => datum["image_url"]}
@@ -34,8 +35,9 @@ class CategoriesController < ApplicationController
       end
     end
     #------------------ END FETCHING INFORMATION ------------ #
-    
-    @restaurants = @category.restaurants
+    else 
+    end
+    @restaurants = @category.restaurants.sort_by(&:name)
   end
 
   def restaurant_listing
