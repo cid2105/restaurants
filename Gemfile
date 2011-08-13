@@ -60,6 +60,7 @@ gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
 gem "oauth"
 gem "authlogic-connect"
 gem "rails3-generators"
+gem "fastercsv"
 gem 'devise'
 gem 'oauth2'
 gem "oa-core"
