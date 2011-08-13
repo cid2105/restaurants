@@ -11,6 +11,7 @@
 
 <div class="ui-widget">
 Restaurant: <input type="text"  title="Search" size="30" id="restaurant_search" name="dish[name]">
+<div style="float:right;" id="new_restaurant"> <%= link_to 'New Restaurant', new_restaurant_path(:category => @category, :zip => @zip), :style => "text-decoration:none;" %> </div>
 </div>
 
 
@@ -34,7 +35,6 @@ Restaurant: <input type="text"  title="Search" size="30" id="restaurant_search" 
 
 <br />
 
-<%= link_to 'New Restaurant', new_restaurant_path %>
 
 
 
@@ -43,6 +43,15 @@ Restaurant: <input type="text"  title="Search" size="30" id="restaurant_search" 
 $(document).ready(function() 
 {
 	
+	$("#new_restaurant").hover(function()
+	{
+		$(this).css("color", "#45C7EE");
+		$(this).css("text-decoration", "underline");
+	},
+	function()
+	{
+		$(this).css("text-decoration", "none");		
+	});
 	
 	$('input#restaurant_search').quicksearch('table.flexigrid tbody tr');
 	

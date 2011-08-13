@@ -31,20 +31,18 @@
   </div>
   <div class="field">
     <%= f.label :zip %><br />
-    <%= f.text_field :zip %>
+    <%= f.text_field :zip, :value => @zip %>
   </div>
   <div class="field">
-    <%= f.label :website %><br />
+    <%= f.label "Picture URL" %><br />
     <%= f.text_field :website %>
   </div>
   <div class="field">
     <%= f.label :number %><br />
     <%= f.text_field :number %>
   </div> 
-<br/><br/>
-<h2>Tags</h2><br/>
-  <%= render :partial => 'tags/form',
-             :locals => {:form => f} %>
+    <%= hidden_field(:category, :id) %>
+    <%= hidden_field(:zip, :to_s) %>
 <br/>
   <div class="actions">
     <%= f.submit %>

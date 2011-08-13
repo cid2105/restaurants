@@ -113,10 +113,12 @@ h3.txt-247 { background-image: url(../images/txt-247.gif); }
 {
 	cursor:pointer;
 }
+
 .underline_hover :hover
 {
 	text-decoration:underline;
 }
+
 div.bDiv
 {
 	max-height:800px; 
