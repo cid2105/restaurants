@@ -19,16 +19,16 @@
 <tbody >
 <% @categories.each do |category| %>
 
-  <tr onclick="showCategory(<%= category.id %>);" style="cursor:pointer;">
+  <tr onclick="showCategory('<%= category_path(category) %>')" style="cursor:pointer;">
     <td><%= category.name %></td>
   </tr>
 <% end %>
 
 <script>
-function showCategory(id)
+function showCategory(cat_url)
 {
 	var zipcode = $("#zipcode_search").val();
-	var url = "/" + "categories" + "/?zip=" + zipcode;
+	var url = cat_url + "/?zip=" + zipcode;
 	window.location = url;
 }
 </script>
