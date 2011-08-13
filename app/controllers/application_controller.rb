@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
      protected
      
      def render_404
-         render :template => 'error_pages/404', :status => :not_found
+         render :template => 'error_pages/404', :status => :not_found, :alert => "Congrats you broke the site"
        end
        
      def client
