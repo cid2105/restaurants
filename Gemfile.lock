@@ -216,6 +216,7 @@ DEPENDENCIES
   fastercsv
   fb_graph
   gravatar_image_tag
+  haml
   nokogiri
   oa-core
   oauth
