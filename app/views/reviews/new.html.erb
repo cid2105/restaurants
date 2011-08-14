@@ -1,0 +1,55 @@
+<% content_for :nav do %>
+<%= get_navigation("add_review") %>
+<% end %>
+<br/>
+<h2>New Review</h2> <span style="float:right; position:relative; bottom:28px;"><%= link_to 'Back', root_path %></span>
+<% if !flash[:error].nil? %>
+<b style="color:red;"><%= flash[:error] %></b>
+<% else %>
+<b><%= flash[:notice] %></b>
+<% end %>
+<hr class="twitter"/>
+	<% if user_signed_in? %>
+	<%= render "add_review" %>
+	<% else %>
+	<br/>
+	<div class="fberrorbox">Error: You must sign in via facebook login if you wish to post a review.</div> 
+	
+	<br/>
+	<a style="text-decoration:none;" href="<%= user_omniauth_authorize_path(:facebook) %>"><div style="display:inline-block;"><%= image_tag "facebook_icon.png" %></div><div class="underline_hover" style="display:inline-block; position:relative; left:7px; bottom:5px;"> <h1> Sign in </h1></div></a>
+	<% end %>
+
+
+<script>
+
+var json_array;
+$("#restaurant_search").focusout(function() {
+    var restaurant  =$(this).val();
+	var tags;
+	$.post("<%= url_for(:action => :getDishes) %>", {restaurant:restaurant},
+	function(json)
+	{
+		if(json != "error")
+		{
+			json_array = json;
+			json_array = json_array.replace(/\[|\]|\"/ig, "").split("$");
+
+			$( "#dish_name" ).autocomplete({
+				source: json_array
+			});			
+		}
+	});
+})
+
+
+	$(function() {
+			var availableTags = [];
+				<% Restaurant.all.each do |restaurant| %> 
+				availableTags.push("<%= "#{restaurant.name}, #{restaurant.formatted_address}" %>");
+				<% end %>
+
+			$( "#restaurant_search" ).autocomplete({
+				source: availableTags
+			});
+		});
+</script>		

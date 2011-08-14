@@ -1,0 +1,51 @@
+<style>
+.field
+{
+	font-family: 'Arial', sans-serif; font-size:12px; 	font-weight:bold;	
+}
+</style>
+<%= form_tag(:method => :post, :action => :new) %>
+  <div class="field">
+	<% if defined? current_user.name %>
+    <%= f.hidden_field :reviewer, :value => current_user.name %>
+	<% end %>
+  </div>
+
+
+	<div class="field">
+		<%= label :restaurant, "Restaurant" %><br />
+		<%= text_field :restaurant, :name, :id => "restaurant_search" %> 
+	<br />
+	</div>
+	
+	
+<table>
+<tr >
+	<td >
+<div class="field"  style="position:relative; right:1px;">
+    <%= label :dish, :dish %><br />
+	<input type="text" autocomplete="dish" size="30" id="dish_name" value="<%= @dish.name %>" name="dish[name]">
+</div>
+</td><td style="padding-left: 487px;">
+<div class="field">
+    <%= label :review, :price %><br />
+    <select id="dish_price" name="dish[price]" class="field">
+	<option value="1">$</option><option value="2">$$</option>
+	<option value="3">$$$</option><option value="4">$$$$</option>
+	</select>
+  </div>
+</td><td style="padding-left:20px;">
+<div class="field">
+    <span style="position:relative;bottom:3px;"><%= label :review, :recommend %></span><br />
+    <%= check_box :review, :recommend %>
+  </div></td></tr>
+</table>
+  <div class="field">
+    <%= label :review, :content %><br />
+    <%= text_area :review, :content, :style => "height:200px; width:100%; font-weight:normal;", :class => :field %>
+  </div><br/>
+
+  <div class="actions">
+    <%= submit_tag("Save") %>
+  </div>
+</form>

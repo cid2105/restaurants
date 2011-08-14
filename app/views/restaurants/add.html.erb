@@ -1,0 +1,18 @@
+<% content_for :nav do %>
+<%= get_navigation("add_rest") %>
+<% end %>
+<br/>
+
+<h2>New Restaurant <span style="float:right;"><%= link_to 'Back', restaurants_path %></span></h2><br/>
+<b style="color:red;"><%= flash[:error] %></b>
+	<% if user_signed_in? %>
+	<%= render 'form' %>
+	<% else %>
+<div class="fberrorbox">Error: You must sign in via facebook login if you wish to post a review.</div> 
+
+	<br/>	<br/>
+
+	<a style="text-decoration:none;" href="<%= user_omniauth_authorize_path(:facebook) %>"><div style="display:inline-block;"><%= image_tag "facebook_icon.png" %></div><div class="underline_hover" style="display:inline-block; position:relative; left:7px; bottom:5px;"> <h1> Sign in </h1></div></a>
+
+	<br/>	<br/>
+	<% end %>
