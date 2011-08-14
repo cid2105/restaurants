@@ -1,12 +1,12 @@
 
-<tr id="<%= review.id %>"  style="cursor:pointer;" onclick="window.location = '<%= restaurant_dish_url(review.restaurant, review.dish) %>';">
+<tr id="<%= review.id %>"  style="cursor:pointer;">
 
 	<% if defined? dish_name %>
 	<td><%= review.dish.name %></td>
 	<% end %>
 
 
- <td rel="tipsy" id="review_content_<%= review.id %>" style="text-decoration:none;" title="<%=review.content%>">
+ <td rel="tipsy" id="review_content_<%= review.id %>" onclick="window.location = '<%= restaurant_dish_url(review.restaurant, review.dish) %>';" style="text-decoration:none;" title="<%=review.content%>">
 	<div style="position:relative; left: 100px;">
 		<!-- color: #18F -->
 	<p class="bubble" style="position: absolute; color: #333;font-size: 11px; font-family: 'Century Gothic';">

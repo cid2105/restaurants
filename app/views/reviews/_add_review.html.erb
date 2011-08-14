@@ -7,7 +7,7 @@
 <%= form_tag(:method => :post, :action => :new) %>
   <div class="field">
 	<% if defined? current_user.name %>
-    <%= f.hidden_field :reviewer, :value => current_user.name %>
+    <%= hidden_field(:review, :reviewer, :value => current_user.name) %>
 	<% end %>
   </div>
 

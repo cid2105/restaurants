@@ -10,6 +10,7 @@ class ReviewsController < ApplicationController
         return
       end
       params[:review][:price] = params[:dish][:price]
+
       @restaurant = Restaurant.find_by_name(name)
       puts @restaurant.inspect
       @review = Review.create!(params[:review])

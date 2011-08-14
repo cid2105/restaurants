@@ -25,6 +25,8 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
     @dishes = @restaurant.dishes.sort_by(&:name)
     @reviews = @restaurant.reviews.all.sort_by{ |review| review.getScore }.reverse
+    @dish = Dish.new
+    @review = Review.new
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @restaurant }
