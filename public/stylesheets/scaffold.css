@@ -4,14 +4,15 @@ body, html { height: 100%; }
 
 body {
 	background: white;
-    	font-family: 'Raleway', sans-serif;
+    	font-family: 'Arial', sans-serif;
+
 	font-size: 12px;
 	line-height: 18px;
 	color: #888;
 }
 
 
-input .default, textarea, select { font-family: 'Raleway', sans-serif; font-size:12px; }
+input .default, textarea, select { font-family: 'Raleway', sans-serif; font-size:12px; 	font-weight:bold; }
 .default .field  { padding: 4px 5px; border: solid 1px #e7e7e7; color: #969696; height: 15px; }
 .default .field-focused{ color: #333; }
 input.button { padding: 4px 5px; cursor: pointer; }
