@@ -1,8 +1,9 @@
 Blog::Application.routes.draw do
-  
 
- 
   match 'categories/:id' => "categories#show"
+  match 'reviews/get_dishes' => "reviews#getDishes"
+  match 'reviews/new' => 'reviews#new', :as => :new_review
+  match 'restaurants/add' => 'restaurants#add', :as => :new_restaurant
   
   devise_scope :user do
     get 'logout', :to => 'devise/sessions#destroy'

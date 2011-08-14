@@ -5,7 +5,7 @@
 
 <h2>New <%=@category %> Restaurant <span style="float:right;"><%= link_to 'Back', restaurants_path %></span></h2><br/>
 <b style="color:red;"><%= flash[:error] %></b>
-	<% if not user_signed_in? %>
+	<% if user_signed_in? %>
 	<%= render 'form' %>
 	<% else %>
 <div class="fberrorbox">Error: You must sign in via facebook login if you wish to post a review.</div> 

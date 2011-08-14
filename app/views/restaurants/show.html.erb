@@ -13,6 +13,7 @@
 		<li><a href="#tabs-1">About</a></li>
 		<li><a href="#tabs-2">Dishes</a></li>
 		<li><a href="#tabs-3">Reviews</a></li>
+		<li><a href="#tabs-4">Add Review</a></li>
 		<div class="restaurant_nav">
 		<a class="restaurant_link" href="<%= restaurant_path(@restaurant) %>"><%=@restaurant %></a> 
 		</div>
@@ -79,6 +80,20 @@
 	</tbody>
 	</table>		
 	</div>
+	
+	<div id="tabs-4">
+		<h2 style="">Add a review:</h2>
+		<% if user_signed_in? %>
+		<%= render :partial => "reviews/form" %>
+		<% else %>
+		<br/>
+		<div class="fberrorbox">Error: You must sign in via facebook login if you wish to post a review.</div> 
+		
+		<br/>
+		<a style="text-decoration:none;" href="<%= user_omniauth_authorize_path(:facebook) %>"><div style="display:inline-block;"><%= image_tag "facebook_icon.png" %></div><div class="underline_hover" style="display:inline-block; position:relative; left:7px; bottom:5px;"> <h1> Sign in </h1></div></a>
+		<% end %>
+	</div>
+	
 	<div class="cl">&nbsp;</div>
 </div>
 </div>

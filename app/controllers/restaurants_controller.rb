@@ -32,6 +32,27 @@ class RestaurantsController < ApplicationController
   end
 
   
+  def add
+    @restaurant = Restaurant.new
+    if request.post?
+      if !params[:restaurant][:name].blank? && !params[:restaurant][:street].blank? && !params[:restaurant][:city].blank? && !params[:restaurant][:state].blank? && !params[:restaurant][:zip].blank? && !params[:restaurant][:number].blank? && !params[:restaurant][:website].blank?
+          @restaurant = Restaurant.new(params[:restaurant])
+      else
+        flash[:error] = 'One or more fields were left blank.'
+        return
+      end
+      respond_to do |format|
+        if @restuarant.save
+          format.html { redirect_to(@restaurant, :notice => 'Restaurant was successfully created.') }
+          format.xml  { render :xml => @restaurant, :status => :created, :location => @dish }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @restaurant.errors, :status => :unprocessable_entity }
+        end
+      end
+    end
+    
+  end
   
   # GET /restaurants/new
   # GET /restaurants/new.xml
@@ -53,11 +74,8 @@ class RestaurantsController < ApplicationController
   # POST /restaurants
   # POST /restaurants.xml
   def create
-
-    
     if !params[:restaurant][:name].blank? && !params[:restaurant][:street].blank? && !params[:restaurant][:city].blank? && !params[:restaurant][:state].blank? && !params[:restaurant][:zip].blank? && !params[:restaurant][:number].blank? && !params[:restaurant][:website].blank?
         @restaurant = Restaurant.new(params[:restaurant])
-        puts "asdf"
     else
         @restaurant = Restaurant.new
         @zip = params[:zip][:to_s]

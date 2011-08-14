@@ -51,7 +51,7 @@ p { padding-bottom: 3px; }
 #search .button { background: url(../images/search-button.gif) no-repeat 0 0; border: 0; }
 
 #navigation { height: 38px; background: url(../images/navigation.gif) no-repeat; padding: 8px 10px 6px; margin-top: 16px; }
-#navigation ul { font-size: 13px; line-height: 38px; text-transform: capitalize; }
+#navigation ul { font-size: 13px; line-height: 38px;}
 #navigation ul li { float: left; display: inline; list-style-type: none; padding-right: 10px; }
 #navigation ul li a { float: left; display: inline; color: #fff; text-decoration: none; padding-left: 17px; }
 #navigation ul li a span { float: left; display: inline; padding-right: 17px; background-position: right 0 !important; }
@@ -125,6 +125,20 @@ div.bDiv
 	max-height:800px; 
 }
 
+.new_restaurant, .new_restaurant:hover
+{
+	padding:3px;
+	border: 1px solid #f2f2f2;
+}
+
+
+
+.new_restaurant:hover
+{
+	background-color: rgba(0, 132, 180, 0.1);
+
+}
+
 
 .restaurant_nav, .restaurant_nav:hover
 {
@@ -145,4 +159,14 @@ text-decoration: none;
 .restaurant_nav .restaurant_link:hover
 {
 	text-decoration: underline;
+}
+
+hr.twitter {
+	    border-color: rgba(0, 0, 0, 0.1) -moz-use-text-color rgba(255, 255, 255, 0.3);
+	    border-style: solid none;
+	    border-width: 1px 0;
+	    clear: both;
+	    display: block;
+	    height: 0;
+	    margin: 15px 0;
 }

@@ -12,12 +12,18 @@ module ApplicationHelper
         token3 = "class=\"active\""
       when "register"
         token4 = "class=\"active\""
+      when "add_rest"
+        token5 = "class=\"active\""
+      when "add_review"
+        token6 = "class=\"active\""
       end
   html = <<HTML
   <div id="navigation">
     <ul>
-      <li><a href="#{root_path}" #{token1}><span>home</span></a></li>
-      <li><a href="#{categories_path}" #{token2}><span>browse</span></a></li>
+      <li><a href="#{root_path}" #{token1}><span>Home</span></a></li>
+      <li><a href="#{categories_path}" #{token2}><span>Browse</span></a></li>
+      <li><a href="#{new_restaurant_url}" #{token5}><span>Add a Restaurant</span></a></li>
+      <li><a href="#{new_review_url}" #{token6}><span>Review a Dish</span></a></li>
       
 HTML
 
