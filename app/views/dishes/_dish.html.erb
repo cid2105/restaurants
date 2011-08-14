@@ -1,11 +1,11 @@
-<tr id="<%= dish.id %>" style="cursor:pointer;" onclick="window.location = '<%= restaurant_dish_url(@restaurant, dish) %>';">
+<tr id="<%= dish.id %>" style="cursor:pointer;" >
 
 <td>
     <%= dish.name %>
 </td>
 
 
- <td id="review_content_<%= dish.id %>" style="text-decoration:none;" title="<%=dish.top_review.content%>">
+ <td id="review_content_<%= dish.id %>" style="text-decoration:none;" title="<%=dish.top_review.content%>" onclick="window.location = '<%= restaurant_dish_url(@restaurant, dish) %>';">
 	
 	<div style="position:relative; left: 100px;">
 		<!-- color: #18F -->

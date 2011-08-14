@@ -112,7 +112,7 @@ $(document).ready(function()
 				<% @dish.reviews.each do |review| %>
 				$("#review_content_<%=review.id%>").tipsy({gravity: $.fn.tipsy.autoNS});
 				<% end %>
-				
+				$("[rel*=tipsy]").tipsy({gravity: $.fn.tipsy.autoNS});
 				
 		
     });
