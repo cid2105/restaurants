@@ -1,8 +1,44 @@
 <% content_for :nav do %>
+<script type="text/javascript">
+	$(function(){
+		$('#vertical-ticker').totemticker({
+			row_height	:	'500px',
+			speed       :   25000,
+			interval    :   10
+		});
+	});
+</script>
 <%= get_navigation("home") %>
+
+
 <% end %>
 <!-- Slider -->
+
+<% content_for :side_panel do %>
+<div id="wrapper" style="position:absolute; right: 100px; bottom:13px;">
+
+<div class="slide-info"> <h2 >Recent Reviews</h2></div>
+	<ul id="vertical-ticker">
+		<% for review in getRecent %>
+			<li>
+				<p class="bubble" style=" color: #333;font-size: 11px; font-family: 'Century Gothic';">
+				<span id="profile_image" style="float:left; padding: 10px;"><%= image_tag "#{User.find_by_name(review.reviewer).pic}", :alt => 'foo' %></span>		<br/>
+				<% if review.content.length > 100 %>
+			   <%= review.content.to_s[0..100] %>...
+				<% else %>
+				 <%= review.content %>
+				<% end %>
+				<br/><span style="color:#777777; font-size:9px;"> - <%= review.reviewer %> </span>
+				</p>
+		</li>
+		<% end %>
+	</ul>
+
+</div>
+<% end %>
+
 <% content_for :header do %>
+
 
 
 
@@ -55,15 +91,20 @@
 <% end %>
 
 <% content_for :three_column do %>
-<!--
+
+<!-- 
 <div class="cols three-cols">
 	<div class="cl">&nbsp;</div>
 	<div class="col">
 		<h2></h2>
-		<h3 class="notext txt-monday-again">MONDAY AGAIN</h3>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ornare consequat tortor quis porttitor. Aliquam sed fringilla arcu. Maecenas sit amet cursus augue. Donec felis eros, luctus at blandit ac.</p>
+		<h3 class="notext txt-monday-again">Recent Reviews </h3>
+		<p>
+			
+			
+		</p>
 		<p><a href="#" class="more">Learn more</a></p>
 	</div>
+
 	<div class="col">
 		<h2></h2>
 		<h3 class="notext txt-wedothis">WE DO THIS AND THAT....</h3>

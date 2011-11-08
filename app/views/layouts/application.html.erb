@@ -28,6 +28,7 @@
 <div id="page" class="shell">
 	<!-- Logo + Search + Navigation -->
 	<div id="top">
+		
 		<div class="cl">&nbsp;</div>
 		<%= image_tag "logo.gif", :alt => 'foo' %>
 		<% form_tag restaurants_path, :method => "get", :id => "search" do %>
@@ -39,10 +40,13 @@
 		<% end %>
 		<div class="cl">&nbsp;</div>
 		<%= yield :nav %>	
+		
 	</div>
 	<!-- END Logo + Search + Navigation -->
 	<!-- Header -->
+	
 	<div id="header">
+<%= yield :side_panel %>
 		<%= yield :header %>	
 	</div>
 	<!-- END Header -->

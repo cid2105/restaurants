@@ -7,10 +7,11 @@ class Review < ActiveRecord::Base
   accepts_nested_attributes_for :dish, :allow_destroy => :true,
        :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
       
-        def getScore
+    def getScore
           getUpVotes - getDownVotes
-        end
-                 
+    end
+  
+           
 private       
        def after_initialize
          if new_record?

@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'activesupport', '3.0.9'
-gem 'rails', '3.0.9'
+gem 'activesupport', '3.0.10'
+gem 'rails', '3.0.10'
 
 gem 'gravatar_image_tag'
 gem 'will_paginate'
@@ -13,7 +13,7 @@ gem 'railties'
 
 group :development do
 	gem 'rspec-rails'
-	gem 'annotate-models', '1.0.4'
+	gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 	 gem 'faker', '0.3.1'
 	gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
 end
@@ -64,7 +64,7 @@ gem "fastercsv"
 gem 'devise'
 gem 'oauth2'
 gem "oa-core"
-gem "omniauth"
+gem "omniauth", :git => 'git://github.com/intridea/omniauth.git', :branch => "0-3-stable"
 gem "haml"
 gem 'fb_graph'
 gem 'jonnii-yelp'
